@@ -1,31 +1,23 @@
 {
-    "name": "gitbook-plugin-ga",
-    "description": "Google Analytics tracking for your gitbook",
+    "name": "gitbook-plugin-ga4",
+    "description": "Google Analytics 4 for gitbook",
     "main": "index.js",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "engines": {
         "gitbook": ">=2.5.1"
     },
-    "homepage": "https://github.com/GitbookIO/plugin-ga",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/GitbookIO/plugin-ga.git"
-    },
     "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/GitbookIO/plugin-ga/issues"
-    },
     "gitbook": {
         "properties": {
-            "token": {
+            "tag": {
                 "type": "string",
-                "title": "Google Analytics Token",
+                "title": "Google Analytics 4 tag",
                 "required": true
             },
-            "configuration": {
-                "type": [ "string", "object" ],
-                "title": "Configuration mode",
-                "default": "auto"
+            "anonymize_ip": {
+                "type": ["boolean"],
+                "title": "IP anonymization for GDPR compliance",
+                "default": false
             }
         }
     }

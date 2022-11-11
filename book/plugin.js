@@ -1,17 +1,22 @@
 require(["gitbook"], function(gitbook) {
-    // Load analytics.js
     gitbook.events.bind("start", function(e, config) {
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        var cfg = config.ga;
-        ga('create', cfg.token, cfg.configuration);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function() {
+            window.dataLayer.push(arguments);
+        };
+        window.gtag('js', new Date());
+        window.gtag('config', config.ga4.tag, {
+            'anonymize_ip': config.ga4.anonymize_ip ?? false
+        });
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=" + config.ga4.tag;
+        document.getElementsByTagName("head")[0].appendChild(script);
     });
-
-    // Notify pageview
     gitbook.events.bind("page.change", function() {
-        ga('send', 'pageview', window.location.pathname+window.location.search);
+        window.gtag('event', 'page_view', {
+            'page_location': window.location.pathname+window.location.search
+        });
     });
 });
